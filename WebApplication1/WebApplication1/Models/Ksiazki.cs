@@ -22,13 +22,11 @@ namespace WebApplication1.Models
         }
     
         public int id_ksiazka { get; set; }
-        public Nullable<int> id_autor { get; set; }
         public string nazwa { get; set; }
         public string opis { get; set; }
         public string isbn { get; set; }
         public Nullable<int> id_biblio { get; set; }
     
-        public virtual Autorzy Autorzy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AutorzyKsiazki> AutorzyKsiazki { get; set; }
         public virtual Biblioteka Biblioteka { get; set; }

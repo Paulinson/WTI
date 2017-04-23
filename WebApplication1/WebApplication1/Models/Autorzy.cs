@@ -18,7 +18,6 @@ namespace WebApplication1.Models
         public Autorzy()
         {
             this.AutorzyKsiazki = new HashSet<AutorzyKsiazki>();
-            this.Ksiazki = new HashSet<Ksiazki>();
         }
     
         public int id_autor { get; set; }
@@ -27,7 +26,5 @@ namespace WebApplication1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AutorzyKsiazki> AutorzyKsiazki { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ksiazki> Ksiazki { get; set; }
     }
 }

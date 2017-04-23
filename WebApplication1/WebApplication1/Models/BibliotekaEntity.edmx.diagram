@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="BibliotekaModel.WypozyczeniaKsiazki" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="BibliotekaModel.FK__Bibliotek__nazwa__1273C1CD" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__AutorzyKs__id_au__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="BibliotekaModel.FK__Ksiazki__id_auto__1DE57479" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__AutorzyKs__id_ks__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Ksiazki__id_bibl__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Pracownic__id_bi__47DBAE45" ManuallyRouted="false" />

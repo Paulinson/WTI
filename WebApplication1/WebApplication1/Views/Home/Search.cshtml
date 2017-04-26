@@ -1,27 +1,53 @@
-﻿@{
-    ViewBag.Title = "Search";
+﻿@model IEnumerable<WebApplication1.Models.Ksiazki>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (@Html.BeginForm())
+    {
+        <p>
+            Wyszukaj: @Html.TextBox("k") <br />
+            <input type="submit" value="Wyszukaj"
+        </p>
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isbn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Biblioteka.nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isbn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Biblioteka.nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Wyświetl", "getEgzemplarz","Borrow", new { id=item.id_ksiazka}) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_ksiazka }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_ksiazka })
+        </td>
+    </tr>
 }
 
-
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-
-    <!-- Hero -->
-    <section class="hero container">
-        <h2>Wyszukiwanie książki</h2>
-        <p>W tym miejscu możesz wpisać tytuł lub autora książki która się interesuje.</p>
-        <form class="form-signin">
-            <input type="text" class="form-control" placeholder="Wpisz książkę" required autofocus>
-        </form>
-        <a class="btn btn-alt" href="register.html">Wyszukaj</a>
-    </section>
-</body>
-</html>
+</table>

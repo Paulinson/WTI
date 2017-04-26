@@ -184,6 +184,9 @@
     <Compile Include="Models\Czytelnik.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Egzemplarze.cs">
+      <DependentUpon>BibliotekaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ksiazki.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
@@ -196,6 +199,9 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Statusy.cs">
+      <DependentUpon>BibliotekaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
@@ -205,6 +211,7 @@
     <Compile Include="Models\WypozyczeniaKsiazki.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WypozyczoneViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,11 +268,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Borrow\Czytelnicy.cshtml" />
     <Content Include="Views\Borrow\GetKsiazki.cshtml" />
+    <Content Include="Views\Borrow\getEgzemplarze.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Borrow\Wypozycz.cshtml" />
+    <Content Include="Views\Borrow\getWypozyczone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

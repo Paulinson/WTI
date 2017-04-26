@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Wypozyczenia
     {
@@ -19,13 +20,9 @@ namespace WebApplication1.Models
         {
             this.WypozyczeniaKsiazki = new HashSet<WypozyczeniaKsiazki>();
         }
-    
+        [Key]
         public int id_wypozyczenie { get; set; }
         public Nullable<int> id_czytelnik { get; set; }
-        public Nullable<System.DateTime> do_kiedy { get; set; }
-        public Nullable<int> czy_oddana { get; set; }
-        public Nullable<int> czy_spozniona { get; set; }
-        public Nullable<int> czy_uszkodzona { get; set; }
     
         public virtual Czytelnik Czytelnik { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

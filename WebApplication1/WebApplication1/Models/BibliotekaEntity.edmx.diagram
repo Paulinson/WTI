@@ -14,15 +14,19 @@
         <EntityTypeShape EntityType="BibliotekaModel.Pracownicy" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BibliotekaModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BibliotekaModel.Wypozyczenia" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BibliotekaModel.WypozyczeniaKsiazki" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BibliotekaModel.WypozyczeniaKsiazki" Width="2" PointX="8.125" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="BibliotekaModel.FK__Bibliotek__nazwa__1273C1CD" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__AutorzyKs__id_au__267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__AutorzyKs__id_ks__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Ksiazki__id_bibl__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Pracownic__id_bi__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Wypozycze__id_cz__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="BibliotekaModel.FK__Wypozycze__id_ks__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="BibliotekaModel.FK__Wypozycze__id_wy__2B3F6F97" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BibliotekaModel.Egzemplarze" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BibliotekaModel.Statusy" Width="1.5" PointX="6.125" PointY="0.5" />
+        <AssociationConnector Association="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F" />
+        <AssociationConnector Association="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A" />
+        <AssociationConnector Association="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

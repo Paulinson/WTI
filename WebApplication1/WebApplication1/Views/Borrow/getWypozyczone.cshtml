@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication1.Models.WypozyczeniaKsiazki>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Lokalizacja
+        </th>
+        <th>
+            Czytelnik
+        </th>
+        <th>
+            Książka
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.Biblioteka.nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wypozyczenia.Czytelnik.imie)
+            @Html.DisplayFor(modelItem => item.Wypozyczenia.Czytelnik.nazwisko)
+            @Html.DisplayFor(modelItem => item.Wypozyczenia.Czytelnik.kod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.sygnatura)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_wypozyczeniaKsiazki })
+        </td>
+    </tr>
+}
+
+</table>

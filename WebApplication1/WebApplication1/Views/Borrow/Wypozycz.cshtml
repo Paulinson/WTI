@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication1.Models.WypozyczeniaKsiazki>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.do_kiedy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.czy_spozniona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.czy_uszkodzona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Egzemplarze.Ksiazki.nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wypozyczenia.id_wypozyczenie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.do_kiedy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.czy_spozniona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.czy_uszkodzona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.nazwa)
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wypozyczenia.id_wypozyczenie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_wypozyczeniaKsiazki })
+        </td>
+    </tr>
+}
+
+</table>

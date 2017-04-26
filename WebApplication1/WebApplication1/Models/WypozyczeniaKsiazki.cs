@@ -11,14 +11,19 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class WypozyczeniaKsiazki
     {
+        [Key]
         public int id_wypozyczeniaKsiazki { get; set; }
-        public Nullable<int> id_ksiazki { get; set; }
         public Nullable<int> id_wypozyczenie { get; set; }
+        public Nullable<System.DateTime> do_kiedy { get; set; }
+        public Nullable<int> czy_spozniona { get; set; }
+        public Nullable<int> czy_uszkodzona { get; set; }
+        public Nullable<int> id_egzemplarza { get; set; }
     
-        public virtual Ksiazki Ksiazki { get; set; }
         public virtual Wypozyczenia Wypozyczenia { get; set; }
+        public virtual Egzemplarze Egzemplarze { get; set; }
     }
 }

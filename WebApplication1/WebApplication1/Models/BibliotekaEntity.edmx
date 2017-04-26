@@ -58,6 +58,15 @@
           <Property Name="nr_mieszkania" Type="int" />
           <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Egzemplarze">
+          <Key>
+            <PropertyRef Name="id_egzemplarz" />
+          </Key>
+          <Property Name="id_egzemplarz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ksiazka" Type="int" />
+          <Property Name="sygnatura" Type="varchar" MaxLength="255" />
+          <Property Name="id_status" Type="int" />
+        </EntityType>
         <EntityType Name="Ksiazki">
           <Key>
             <PropertyRef Name="id_ksiazka" />
@@ -78,6 +87,13 @@
           <Property Name="profesja" Type="varchar" MaxLength="255" />
           <Property Name="id_biblio" Type="int" />
         </EntityType>
+        <EntityType Name="Statusy">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -94,18 +110,17 @@
           </Key>
           <Property Name="id_wypozyczenie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_czytelnik" Type="int" />
-          <Property Name="do_kiedy" Type="datetime" />
-          <Property Name="czy_oddana" Type="int" />
-          <Property Name="czy_spozniona" Type="int" />
-          <Property Name="czy_uszkodzona" Type="int" />
         </EntityType>
         <EntityType Name="WypozyczeniaKsiazki">
           <Key>
             <PropertyRef Name="id_wypozyczeniaKsiazki" />
           </Key>
           <Property Name="id_wypozyczeniaKsiazki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_ksiazki" Type="int" />
           <Property Name="id_wypozyczenie" Type="int" />
+          <Property Name="do_kiedy" Type="datetime" />
+          <Property Name="czy_spozniona" Type="int" />
+          <Property Name="czy_uszkodzona" Type="int" />
+          <Property Name="id_egzemplarza" Type="int" />
         </EntityType>
         <Association Name="FK__AutorzyKs__id_au__267ABA7A">
           <End Role="Autorzy" Type="Self.Autorzy" Multiplicity="0..1" />
@@ -140,6 +155,30 @@
             </Principal>
             <Dependent Role="Biblioteka">
               <PropertyRef Name="id_adres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplar__id_ks__6FE99F9F">
+          <End Role="Ksiazki" Type="Self.Ksiazki" Multiplicity="0..1" />
+          <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ksiazki">
+              <PropertyRef Name="id_ksiazka" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_ksiazka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplar__id_st__72C60C4A">
+          <End Role="Statusy" Type="Self.Statusy" Multiplicity="0..1" />
+          <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statusy">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -179,15 +218,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wypozycze__id_ks__2A4B4B5E">
-          <End Role="Ksiazki" Type="Self.Ksiazki" Multiplicity="0..1" />
+        <Association Name="FK__Wypozycze__id_eg__74AE54BC">
+          <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="0..1" />
           <End Role="WypozyczeniaKsiazki" Type="Self.WypozyczeniaKsiazki" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Ksiazki">
-              <PropertyRef Name="id_ksiazka" />
+            <Principal Role="Egzemplarze">
+              <PropertyRef Name="id_egzemplarz" />
             </Principal>
             <Dependent Role="WypozyczeniaKsiazki">
-              <PropertyRef Name="id_ksiazki" />
+              <PropertyRef Name="id_egzemplarza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -240,8 +279,10 @@
           <EntitySet Name="AutorzyKsiazki" EntityType="Self.AutorzyKsiazki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Biblioteka" EntityType="Self.Biblioteka" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Czytelnik" EntityType="Self.Czytelnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Egzemplarze" EntityType="Self.Egzemplarze" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ksiazki" EntityType="Self.Ksiazki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statusy" EntityType="Self.Statusy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wypozyczenia" EntityType="Self.Wypozyczenia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WypozyczeniaKsiazki" EntityType="Self.WypozyczeniaKsiazki" Schema="dbo" store:Type="Tables" />
@@ -257,6 +298,14 @@
             <End Role="AdresyBiblio" EntitySet="AdresyBiblio" />
             <End Role="Biblioteka" EntitySet="Biblioteka" />
           </AssociationSet>
+          <AssociationSet Name="FK__Egzemplar__id_ks__6FE99F9F" Association="Self.FK__Egzemplar__id_ks__6FE99F9F">
+            <End Role="Ksiazki" EntitySet="Ksiazki" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egzemplar__id_st__72C60C4A" Association="Self.FK__Egzemplar__id_st__72C60C4A">
+            <End Role="Statusy" EntitySet="Statusy" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
           <AssociationSet Name="FK__Ksiazki__id_bibl__48CFD27E" Association="Self.FK__Ksiazki__id_bibl__48CFD27E">
             <End Role="Biblioteka" EntitySet="Biblioteka" />
             <End Role="Ksiazki" EntitySet="Ksiazki" />
@@ -269,8 +318,8 @@
             <End Role="Czytelnik" EntitySet="Czytelnik" />
             <End Role="Wypozyczenia" EntitySet="Wypozyczenia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wypozycze__id_ks__2A4B4B5E" Association="Self.FK__Wypozycze__id_ks__2A4B4B5E">
-            <End Role="Ksiazki" EntitySet="Ksiazki" />
+          <AssociationSet Name="FK__Wypozycze__id_eg__74AE54BC" Association="Self.FK__Wypozycze__id_eg__74AE54BC">
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
             <End Role="WypozyczeniaKsiazki" EntitySet="WypozyczeniaKsiazki" />
           </AssociationSet>
           <AssociationSet Name="FK__Wypozycze__id_wy__2B3F6F97" Association="Self.FK__Wypozycze__id_wy__2B3F6F97">
@@ -354,7 +403,7 @@
           <Property Name="id_biblio" Type="Int32" />
           <NavigationProperty Name="AutorzyKsiazki" Relationship="Self.FK__AutorzyKs__id_ks__276EDEB3" FromRole="Ksiazki" ToRole="AutorzyKsiazki" />
           <NavigationProperty Name="Biblioteka" Relationship="Self.FK__Ksiazki__id_bibl__48CFD27E" FromRole="Ksiazki" ToRole="Biblioteka" />
-          <NavigationProperty Name="WypozyczeniaKsiazki" Relationship="Self.FK__Wypozycze__id_ks__2A4B4B5E" FromRole="Ksiazki" ToRole="WypozyczeniaKsiazki" />
+          <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F" FromRole="Ksiazki" ToRole="Egzemplarze" />
         </EntityType>
         <EntityType Name="Pracownicy">
           <Key>
@@ -383,10 +432,6 @@
           </Key>
           <Property Name="id_wypozyczenie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_czytelnik" Type="Int32" />
-          <Property Name="do_kiedy" Type="DateTime" Precision="3" />
-          <Property Name="czy_oddana" Type="Int32" />
-          <Property Name="czy_spozniona" Type="Int32" />
-          <Property Name="czy_uszkodzona" Type="Int32" />
           <NavigationProperty Name="Czytelnik" Relationship="Self.FK__Wypozycze__id_cz__239E4DCF" FromRole="Wypozyczenia" ToRole="Czytelnik" />
           <NavigationProperty Name="WypozyczeniaKsiazki" Relationship="Self.FK__Wypozycze__id_wy__2B3F6F97" FromRole="Wypozyczenia" ToRole="WypozyczeniaKsiazki" />
         </EntityType>
@@ -395,10 +440,13 @@
             <PropertyRef Name="id_wypozyczeniaKsiazki" />
           </Key>
           <Property Name="id_wypozyczeniaKsiazki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_ksiazki" Type="Int32" />
           <Property Name="id_wypozyczenie" Type="Int32" />
-          <NavigationProperty Name="Ksiazki" Relationship="Self.FK__Wypozycze__id_ks__2A4B4B5E" FromRole="WypozyczeniaKsiazki" ToRole="Ksiazki" />
           <NavigationProperty Name="Wypozyczenia" Relationship="Self.FK__Wypozycze__id_wy__2B3F6F97" FromRole="WypozyczeniaKsiazki" ToRole="Wypozyczenia" />
+          <Property Name="do_kiedy" Type="DateTime" Precision="3" />
+          <Property Name="czy_spozniona" Type="Int32" />
+          <Property Name="czy_uszkodzona" Type="Int32" />
+          <Property Name="id_egzemplarza" Type="Int32" />
+          <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC" FromRole="WypozyczeniaKsiazki" ToRole="Egzemplarze" />
         </EntityType>
         <Association Name="FK__Bibliotek__nazwa__1273C1CD">
           <End Role="AdresyBiblio" Type="Self.AdresyBiblio" Multiplicity="0..1" />
@@ -472,18 +520,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wypozycze__id_ks__2A4B4B5E">
-          <End Role="Ksiazki" Type="Self.Ksiazki" Multiplicity="0..1" />
-          <End Role="WypozyczeniaKsiazki" Type="Self.WypozyczeniaKsiazki" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ksiazki">
-              <PropertyRef Name="id_ksiazka" />
-            </Principal>
-            <Dependent Role="WypozyczeniaKsiazki">
-              <PropertyRef Name="id_ksiazki" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Wypozycze__id_wy__2B3F6F97">
           <End Role="Wypozyczenia" Type="Self.Wypozyczenia" Multiplicity="0..1" />
           <End Role="WypozyczeniaKsiazki" Type="Self.WypozyczeniaKsiazki" Multiplicity="*" />
@@ -531,10 +567,6 @@
             <End Role="Czytelnik" EntitySet="Czytelnik" />
             <End Role="Wypozyczenia" EntitySet="Wypozyczenia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wypozycze__id_ks__2A4B4B5E" Association="Self.FK__Wypozycze__id_ks__2A4B4B5E">
-            <End Role="Ksiazki" EntitySet="Ksiazki" />
-            <End Role="WypozyczeniaKsiazki" EntitySet="WypozyczeniaKsiazki" />
-          </AssociationSet>
           <AssociationSet Name="FK__Wypozycze__id_wy__2B3F6F97" Association="Self.FK__Wypozycze__id_wy__2B3F6F97">
             <End Role="Wypozyczenia" EntitySet="Wypozyczenia" />
             <End Role="WypozyczeniaKsiazki" EntitySet="WypozyczeniaKsiazki" />
@@ -569,6 +601,20 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Egzemplarze" EntityType="BibliotekaModel.Egzemplarze" />
+          <EntitySet Name="Statusy" EntityType="BibliotekaModel.Statusy" />
+          <AssociationSet Name="FK__Egzemplar__id_ks__6FE99F9F" Association="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F">
+            <End Role="Ksiazki" EntitySet="Ksiazki" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egzemplar__id_st__72C60C4A" Association="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A">
+            <End Role="Statusy" EntitySet="Statusy" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycze__id_eg__74AE54BC" Association="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC">
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+            <End Role="WypozyczeniaKsiazki" EntitySet="WypozyczeniaKsiazki" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -581,6 +627,62 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Egzemplarze">
+          <Key>
+            <PropertyRef Name="id_egzemplarz" />
+          </Key>
+          <Property Name="id_egzemplarz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ksiazka" Type="Int32" />
+          <Property Name="sygnatura" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_status" Type="Int32" />
+          <NavigationProperty Name="Ksiazki" Relationship="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F" FromRole="Egzemplarze" ToRole="Ksiazki" />
+          <NavigationProperty Name="Statusy" Relationship="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A" FromRole="Egzemplarze" ToRole="Statusy" />
+          <NavigationProperty Name="WypozyczeniaKsiazki" Relationship="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC" FromRole="Egzemplarze" ToRole="WypozyczeniaKsiazki" />
+        </EntityType>
+        <EntityType Name="Statusy">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A" FromRole="Statusy" ToRole="Egzemplarze" />
+        </EntityType>
+        <Association Name="FK__Egzemplar__id_ks__6FE99F9F">
+          <End Type="BibliotekaModel.Ksiazki" Role="Ksiazki" Multiplicity="0..1" />
+          <End Type="BibliotekaModel.Egzemplarze" Role="Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ksiazki">
+              <PropertyRef Name="id_ksiazka" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_ksiazka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplar__id_st__72C60C4A">
+          <End Type="BibliotekaModel.Statusy" Role="Statusy" Multiplicity="0..1" />
+          <End Type="BibliotekaModel.Egzemplarze" Role="Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statusy">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycze__id_eg__74AE54BC">
+          <End Type="BibliotekaModel.Egzemplarze" Role="Egzemplarze" Multiplicity="0..1" />
+          <End Type="BibliotekaModel.WypozyczeniaKsiazki" Role="WypozyczeniaKsiazki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egzemplarze">
+              <PropertyRef Name="id_egzemplarz" />
+            </Principal>
+            <Dependent Role="WypozyczeniaKsiazki">
+              <PropertyRef Name="id_egzemplarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -683,18 +785,17 @@
               <MappingFragment StoreEntitySet="Wypozyczenia">
                 <ScalarProperty Name="id_wypozyczenie" ColumnName="id_wypozyczenie" />
                 <ScalarProperty Name="id_czytelnik" ColumnName="id_czytelnik" />
-                <ScalarProperty Name="do_kiedy" ColumnName="do_kiedy" />
-                <ScalarProperty Name="czy_oddana" ColumnName="czy_oddana" />
-                <ScalarProperty Name="czy_spozniona" ColumnName="czy_spozniona" />
-                <ScalarProperty Name="czy_uszkodzona" ColumnName="czy_uszkodzona" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WypozyczeniaKsiazki">
             <EntityTypeMapping TypeName="BibliotekaModel.WypozyczeniaKsiazki">
               <MappingFragment StoreEntitySet="WypozyczeniaKsiazki">
+                <ScalarProperty Name="id_egzemplarza" ColumnName="id_egzemplarza" />
+                <ScalarProperty Name="czy_uszkodzona" ColumnName="czy_uszkodzona" />
+                <ScalarProperty Name="czy_spozniona" ColumnName="czy_spozniona" />
+                <ScalarProperty Name="do_kiedy" ColumnName="do_kiedy" />
                 <ScalarProperty Name="id_wypozyczeniaKsiazki" ColumnName="id_wypozyczeniaKsiazki" />
-                <ScalarProperty Name="id_ksiazki" ColumnName="id_ksiazki" />
                 <ScalarProperty Name="id_wypozyczenie" ColumnName="id_wypozyczenie" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -723,6 +824,24 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BibliotekaModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BibliotekaModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Egzemplarze">
+            <EntityTypeMapping TypeName="BibliotekaModel.Egzemplarze">
+              <MappingFragment StoreEntitySet="Egzemplarze">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="sygnatura" ColumnName="sygnatura" />
+                <ScalarProperty Name="id_ksiazka" ColumnName="id_ksiazka" />
+                <ScalarProperty Name="id_egzemplarz" ColumnName="id_egzemplarz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statusy">
+            <EntityTypeMapping TypeName="BibliotekaModel.Statusy">
+              <MappingFragment StoreEntitySet="Statusy">
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

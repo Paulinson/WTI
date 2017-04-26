@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Biblioteka
     {
@@ -20,7 +21,7 @@ namespace WebApplication1.Models
             this.Ksiazki = new HashSet<Ksiazki>();
             this.Pracownicy = new HashSet<Pracownicy>();
         }
-    
+        [Key]
         public int id_biblio { get; set; }
         public Nullable<int> id_adres { get; set; }
         public string nazwa { get; set; }

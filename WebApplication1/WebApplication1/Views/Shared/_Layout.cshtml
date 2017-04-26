@@ -21,10 +21,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Wyszukiwanie", "Search", "Home")</li>
+                    <li>@Html.ActionLink("Wyszukiwanie", "getKsiazki", "Borrow")</li>
                     <li>@Html.ActionLink("Konto czytelnika", "Login", "Account")</li>
                     <li>@Html.ActionLink("Spis bibliotek", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Dodaj czytelnika", "Register", "Account")</li>
+                   @if(Session["id"] != null){ <li>@Html.ActionLink("Wypożyczenia", "getWypozyczone", "Borrow")</li>}
+                   
                 </ul>
             </div>
         </div>

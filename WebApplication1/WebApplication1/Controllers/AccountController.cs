@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
         {
             if(ModelState.IsValid)
             {
-                var detailsUser = biblioDB.Czytelnik.Where(p => p.pesel == czyt.pesel).FirstOrDefault();
+                var detailsUser = biblioDB.Czytelnik.Where(p => p.kod == czyt.kod).FirstOrDefault();
                 if (detailsUser == null)
                 {
                     biblioDB.Czytelnik.Add(czyt);
@@ -69,9 +69,9 @@ namespace WebApplication1.Controllers
                 var details = biblioDB.Czytelnik.Where(a => a.kod.Equals(czyt.kod) && a.pesel.Equals(czyt.pesel)).FirstOrDefault();
                 if(details != null)
                 {
-                    Session["id"] = czyt.id_czytelnik;
-                    Session["imie"] = czyt.imie;
-                    Session["nazwisko"] = czyt.nazwisko;
+                    Session["id"] = details.id_czytelnik;
+                    Session["imie"] = details.imie;
+                    Session["nazwisko"] = details.nazwisko;
                     return RedirectToAction("Index", "Home");
                 }
                 else

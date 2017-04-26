@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Ksiazki
     {
@@ -18,9 +19,9 @@ namespace WebApplication1.Models
         public Ksiazki()
         {
             this.AutorzyKsiazki = new HashSet<AutorzyKsiazki>();
-            this.WypozyczeniaKsiazki = new HashSet<WypozyczeniaKsiazki>();
+            this.Egzemplarze = new HashSet<Egzemplarze>();
         }
-    
+        [Key]
         public int id_ksiazka { get; set; }
         public string nazwa { get; set; }
         public string opis { get; set; }
@@ -31,6 +32,6 @@ namespace WebApplication1.Models
         public virtual ICollection<AutorzyKsiazki> AutorzyKsiazki { get; set; }
         public virtual Biblioteka Biblioteka { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WypozyczeniaKsiazki> WypozyczeniaKsiazki { get; set; }
+        public virtual ICollection<Egzemplarze> Egzemplarze { get; set; }
     }
 }

@@ -13,14 +13,18 @@ namespace WebApplication1.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     
-    public partial class AutorzyKsiazki
+    public partial class Statusy
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Statusy()
+        {
+            this.Egzemplarze = new HashSet<Egzemplarze>();
+        }
         [Key]
-        public int id_autKsiazki { get; set; }
-        public Nullable<int> id_autor { get; set; }
-        public Nullable<int> id_ksiazka { get; set; }
+        public int id_status { get; set; }
+        public string nazwa { get; set; }
     
-        public virtual Autorzy Autorzy { get; set; }
-        public virtual Ksiazki Ksiazki { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egzemplarze> Egzemplarze { get; set; }
     }
 }

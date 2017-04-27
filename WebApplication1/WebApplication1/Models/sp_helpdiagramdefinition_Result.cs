@@ -10,11 +10,9 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class sp_helpdiagramdefinition_Result
     {
-        [Key]
         public Nullable<int> version { get; set; }
         public byte[] definition { get; set; }
     }

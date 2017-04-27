@@ -11,11 +11,9 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class WypozyczeniaKsiazki
     {
-        [Key]
         public int id_wypozyczeniaKsiazki { get; set; }
         public Nullable<int> id_wypozyczenie { get; set; }
         public Nullable<System.DateTime> do_kiedy { get; set; }

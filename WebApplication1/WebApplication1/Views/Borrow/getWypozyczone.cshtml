@@ -14,6 +14,12 @@
         <th>
             Książka
         </th>
+        <th>
+            Znak
+        </th>
+        <th>
+            Data zwrotu: 
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -28,12 +34,14 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
+            ISBN: @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Egzemplarze.sygnatura)
+        </td>
+        <td>
+            @{string zwrot = item.do_kiedy.ToString().Substring(0, 10);}
+            @Html.DisplayFor(modelItem => zwrot)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczeniaKsiazki }) |

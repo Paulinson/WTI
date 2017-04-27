@@ -12,7 +12,7 @@
             @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Statusy.nazwa)
+            Status
         </th>
         <th></th>
     </tr>
@@ -29,10 +29,11 @@
             @Html.DisplayFor(modelItem => item.Statusy.nazwa)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_egzemplarz }) |
-            @Html.ActionLink("Zamów", "Wypozycz", new { id=item.id_egzemplarz }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_egzemplarz })
+           
+            @if(item.id_status == 1)
+            {@Html.ActionLink("Zamów", "Wypozycz", new { id=item.id_egzemplarz }) }
         </td>
+           
     </tr>
 }
 

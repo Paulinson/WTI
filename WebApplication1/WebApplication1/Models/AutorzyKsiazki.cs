@@ -11,11 +11,9 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class AutorzyKsiazki
     {
-        [Key]
         public int id_autKsiazki { get; set; }
         public Nullable<int> id_autor { get; set; }
         public Nullable<int> id_ksiazka { get; set; }

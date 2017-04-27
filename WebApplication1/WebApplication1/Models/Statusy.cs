@@ -11,7 +11,6 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Statusy
     {
@@ -20,7 +19,7 @@ namespace WebApplication1.Models
         {
             this.Egzemplarze = new HashSet<Egzemplarze>();
         }
-        [Key]
+    
         public int id_status { get; set; }
         public string nazwa { get; set; }
     

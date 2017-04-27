@@ -11,7 +11,6 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Ksiazki
     {
@@ -21,7 +20,7 @@ namespace WebApplication1.Models
             this.AutorzyKsiazki = new HashSet<AutorzyKsiazki>();
             this.Egzemplarze = new HashSet<Egzemplarze>();
         }
-        [Key]
+    
         public int id_ksiazka { get; set; }
         public string nazwa { get; set; }
         public string opis { get; set; }

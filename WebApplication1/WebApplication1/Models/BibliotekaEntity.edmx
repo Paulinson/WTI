@@ -117,7 +117,7 @@
           </Key>
           <Property Name="id_wypozyczeniaKsiazki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_wypozyczenie" Type="int" />
-          <Property Name="do_kiedy" Type="datetime" />
+          <Property Name="do_kiedy" Type="date" />
           <Property Name="czy_spozniona" Type="int" />
           <Property Name="czy_uszkodzona" Type="int" />
           <Property Name="id_egzemplarza" Type="int" />
@@ -442,7 +442,7 @@
           <Property Name="id_wypozyczeniaKsiazki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_wypozyczenie" Type="Int32" />
           <NavigationProperty Name="Wypozyczenia" Relationship="Self.FK__Wypozycze__id_wy__2B3F6F97" FromRole="WypozyczeniaKsiazki" ToRole="Wypozyczenia" />
-          <Property Name="do_kiedy" Type="DateTime" Precision="3" />
+          <Property Name="do_kiedy" Type="DateTime" Precision="0" />
           <Property Name="czy_spozniona" Type="Int32" />
           <Property Name="czy_uszkodzona" Type="Int32" />
           <Property Name="id_egzemplarza" Type="Int32" />

@@ -33,8 +33,14 @@
             @Html.DisplayFor(modelItem=>item.Ksiazki.nazwa)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Autorzy.imie)
-            @Html.DisplayFor(modelItem => item.Autorzy.nazwisko)
+            @{
+                int? ksiazka = item.id_ksiazka;
+                var autorzy = item.Ksiazki.AutorzyKsiazki.Where(p => p.id_ksiazka == ksiazka); 
+              }                   
+           @foreach(var a in autorzy)
+           {
+              <p>@Html.DisplayFor(modelItem => a.Autorzy.nazwisko), </p>
+           }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Ksiazki.isbn)
@@ -45,8 +51,6 @@
         <td>
             
             @Html.ActionLink("Wyświetl", "getEgzemplarze", new { id=item.id_ksiazka})|
-            @Html.ActionLink("Zamów", "Wypozycz", new { id=item.id_ksiazka }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_autKsiazki })
         </td>
     </tr>
 }

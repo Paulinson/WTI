@@ -47,7 +47,6 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -77,6 +76,35 @@ namespace WebApplication1.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Niepoprawne dane!");
+                }
+            }
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+        [AllowAnonymous]
+        public ActionResult LoginPrac(Pracownicy prac)
+        {
+            #region RemoveModelState
+            ModelState.Remove("imie");
+            ModelState.Remove("nazwisko");
+            ModelState.Remove("profesja");
+            ModelState.Remove("id_biblio");
+
+            #endregion
+            if (ModelState.IsValid)
+            {
+                var details = biblioDB.Pracownicy.Where(a => a.nick.Equals(prac.nick) && a.haslo.Equals(prac.haslo)).FirstOrDefault();
+                if (details != null)
+                {
+                    Session["idPrac"] = details.id_pracownik;
+                    Session["imie"] = details.imie;
+                    Session["nazwisko"] = details.nazwisko;
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View();

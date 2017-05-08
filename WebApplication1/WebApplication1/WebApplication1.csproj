@@ -211,6 +211,7 @@
     <Compile Include="Models\WypozyczeniaKsiazki.cs">
       <DependentUpon>BibliotekaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WypozyczoneView.cs" />
     <Compile Include="Models\WypozyczoneViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -274,8 +275,10 @@
     <Content Include="Views\Borrow\GetKsiazki.cshtml" />
     <Content Include="Views\Borrow\getEgzemplarze.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Borrow\Wypozycz.cshtml" />
     <Content Include="Views\Borrow\getWypozyczone.cshtml" />
+    <Content Include="Views\Borrow\getZamowione.cshtml" />
+    <Content Include="Views\Account\LoginPrac.cshtml" />
+    <Content Include="Views\Borrow\getWypozyczenia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

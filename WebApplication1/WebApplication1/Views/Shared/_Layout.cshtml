@@ -11,25 +11,60 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("System zarządzania biblioteką", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Wyszukiwanie", "getKsiazki", "Borrow")</li>
-                    <li>@Html.ActionLink("Konto czytelnika", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Spis bibliotek", "Contact", "Home")</li>
-                   @if(Session["id"] != null){ <li>@Html.ActionLink("Wypożyczenia", "getWypozyczone", "Borrow")</li>}
-                   
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        @Html.ActionLink("System zarządzania biblioteką", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
+    @if (Session["idPrac"] == null)
+            {
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Wyszukiwanie", "getKsiazki", "Borrow")</li>
+                <li>@Html.ActionLink("Konto czytelnika", "Login", "Account")</li>
+                <li>@Html.ActionLink("Spis bibliotek", "Contact", "Home")</li>
+                @if(Session["id"] != null){
+                    <li>@Html.ActionLink("Wypożyczenia", "getWypozyczone", "Borrow")</li>}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if(Session["id"] == null){
+                    <li>@Html.ActionLink("Dostęp wewnętrzny", "LoginPrac", "Account")</li>}
+                   else {
+                    <li>@Html.ActionLink("Wyloguj", "LogOut", "Account")</li>}
+            </ul>
+        </div>
+            }
+            else
+            {
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Zamowienia", "getZamowione", "Borrow")</li>
+                <li>@Html.ActionLink("Przeglądaj", "getEgzemplarzePrac", "Borrow")</li>
+                <li>@Html.ActionLink("Wypożyczenia", "getWypozyczenia", "Borrow")</li>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Administracja
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Nowy czytelenik", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Nowy pracownik", "Add")</li>
+                        <li>@Html.ActionLink("Zarządzaj czytelnikami", "Add")</li>
+                    </ul>
+                </li>
+                </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Wyloguj", "LogOut","Account")</li>
                 </ul>
             </div>
+          
+            }
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

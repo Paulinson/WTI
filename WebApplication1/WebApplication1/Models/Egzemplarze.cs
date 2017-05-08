@@ -24,10 +24,15 @@ namespace WebApplication1.Models
         public Nullable<int> id_ksiazka { get; set; }
         public string sygnatura { get; set; }
         public Nullable<int> id_status { get; set; }
+        public Nullable<int> id_biblio { get; set; }
+        public Nullable<int> czy_zamowiona { get; set; }
+        public Nullable<int> komu { get; set; }
     
         public virtual Ksiazki Ksiazki { get; set; }
         public virtual Statusy Statusy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WypozyczeniaKsiazki> WypozyczeniaKsiazki { get; set; }
+        public virtual Biblioteka Biblioteka { get; set; }
+        public virtual Czytelnik Czytelnik { get; set; }
     }
 }

@@ -66,6 +66,9 @@
           <Property Name="id_ksiazka" Type="int" />
           <Property Name="sygnatura" Type="varchar" MaxLength="255" />
           <Property Name="id_status" Type="int" />
+          <Property Name="id_biblio" Type="int" />
+          <Property Name="czy_zamowiona" Type="int" />
+          <Property Name="komu" Type="int" />
         </EntityType>
         <EntityType Name="Ksiazki">
           <Key>
@@ -86,6 +89,8 @@
           <Property Name="nazwisko" Type="varchar" MaxLength="255" />
           <Property Name="profesja" Type="varchar" MaxLength="255" />
           <Property Name="id_biblio" Type="int" />
+          <Property Name="nick" Type="varchar" MaxLength="255" />
+          <Property Name="haslo" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="Statusy">
           <Key>
@@ -158,6 +163,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Egzemplar__id_bi__01142BA1">
+          <End Role="Biblioteka" Type="Self.Biblioteka" Multiplicity="0..1" />
+          <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Biblioteka">
+              <PropertyRef Name="id_biblio" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_biblio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Egzemplar__id_ks__6FE99F9F">
           <End Role="Ksiazki" Type="Self.Ksiazki" Multiplicity="0..1" />
           <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="*" />
@@ -179,6 +196,18 @@
             </Principal>
             <Dependent Role="Egzemplarze">
               <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplarz__komu__14270015">
+          <End Role="Czytelnik" Type="Self.Czytelnik" Multiplicity="0..1" />
+          <End Role="Egzemplarze" Type="Self.Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Czytelnik">
+              <PropertyRef Name="id_czytelnik" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="komu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -298,12 +327,20 @@
             <End Role="AdresyBiblio" EntitySet="AdresyBiblio" />
             <End Role="Biblioteka" EntitySet="Biblioteka" />
           </AssociationSet>
+          <AssociationSet Name="FK__Egzemplar__id_bi__01142BA1" Association="Self.FK__Egzemplar__id_bi__01142BA1">
+            <End Role="Biblioteka" EntitySet="Biblioteka" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
           <AssociationSet Name="FK__Egzemplar__id_ks__6FE99F9F" Association="Self.FK__Egzemplar__id_ks__6FE99F9F">
             <End Role="Ksiazki" EntitySet="Ksiazki" />
             <End Role="Egzemplarze" EntitySet="Egzemplarze" />
           </AssociationSet>
           <AssociationSet Name="FK__Egzemplar__id_st__72C60C4A" Association="Self.FK__Egzemplar__id_st__72C60C4A">
             <End Role="Statusy" EntitySet="Statusy" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egzemplarz__komu__14270015" Association="Self.FK__Egzemplarz__komu__14270015">
+            <End Role="Czytelnik" EntitySet="Czytelnik" />
             <End Role="Egzemplarze" EntitySet="Egzemplarze" />
           </AssociationSet>
           <AssociationSet Name="FK__Ksiazki__id_bibl__48CFD27E" Association="Self.FK__Ksiazki__id_bibl__48CFD27E">
@@ -373,6 +410,7 @@
           <NavigationProperty Name="AdresyBiblio" Relationship="Self.FK__Bibliotek__nazwa__1273C1CD" FromRole="Biblioteka" ToRole="AdresyBiblio" />
           <NavigationProperty Name="Ksiazki" Relationship="Self.FK__Ksiazki__id_bibl__48CFD27E" FromRole="Biblioteka" ToRole="Ksiazki" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK__Pracownic__id_bi__47DBAE45" FromRole="Biblioteka" ToRole="Pracownicy" />
+          <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Egzemplar__id_bi__01142BA1" FromRole="Biblioteka" ToRole="Egzemplarze" />
         </EntityType>
         <EntityType Name="Czytelnik">
           <Key>
@@ -391,6 +429,7 @@
           <Property Name="nr_domu" Type="Int32" />
           <Property Name="nr_mieszkania" Type="Int32" />
           <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Egzemplarz__komu__14270015" FromRole="Czytelnik" ToRole="Egzemplarze" />
         </EntityType>
         <EntityType Name="Ksiazki">
           <Key>
@@ -415,6 +454,8 @@
           <Property Name="profesja" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="id_biblio" Type="Int32" />
           <NavigationProperty Name="Biblioteka" Relationship="Self.FK__Pracownic__id_bi__47DBAE45" FromRole="Pracownicy" ToRole="Biblioteka" />
+          <Property Name="nick" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -615,6 +656,14 @@
             <End Role="Egzemplarze" EntitySet="Egzemplarze" />
             <End Role="WypozyczeniaKsiazki" EntitySet="WypozyczeniaKsiazki" />
           </AssociationSet>
+          <AssociationSet Name="FK__Egzemplar__id_bi__01142BA1" Association="BibliotekaModel.FK__Egzemplar__id_bi__01142BA1">
+            <End Role="Biblioteka" EntitySet="Biblioteka" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egzemplarz__komu__14270015" Association="BibliotekaModel.FK__Egzemplarz__komu__14270015">
+            <End Role="Czytelnik" EntitySet="Czytelnik" />
+            <End Role="Egzemplarze" EntitySet="Egzemplarze" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -638,6 +687,11 @@
           <NavigationProperty Name="Ksiazki" Relationship="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F" FromRole="Egzemplarze" ToRole="Ksiazki" />
           <NavigationProperty Name="Statusy" Relationship="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A" FromRole="Egzemplarze" ToRole="Statusy" />
           <NavigationProperty Name="WypozyczeniaKsiazki" Relationship="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC" FromRole="Egzemplarze" ToRole="WypozyczeniaKsiazki" />
+          <Property Name="id_biblio" Type="Int32" />
+          <NavigationProperty Name="Biblioteka" Relationship="BibliotekaModel.FK__Egzemplar__id_bi__01142BA1" FromRole="Egzemplarze" ToRole="Biblioteka" />
+          <Property Name="czy_zamowiona" Type="Int32" />
+          <Property Name="komu" Type="Int32" />
+          <NavigationProperty Name="Czytelnik" Relationship="BibliotekaModel.FK__Egzemplarz__komu__14270015" FromRole="Egzemplarze" ToRole="Czytelnik" />
         </EntityType>
         <EntityType Name="Statusy">
           <Key>
@@ -680,6 +734,30 @@
             </Principal>
             <Dependent Role="WypozyczeniaKsiazki">
               <PropertyRef Name="id_egzemplarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplar__id_bi__01142BA1">
+          <End Type="BibliotekaModel.Biblioteka" Role="Biblioteka" Multiplicity="0..1" />
+          <End Type="BibliotekaModel.Egzemplarze" Role="Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Biblioteka">
+              <PropertyRef Name="id_biblio" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="id_biblio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egzemplarz__komu__14270015">
+          <End Type="BibliotekaModel.Czytelnik" Role="Czytelnik" Multiplicity="0..1" />
+          <End Type="BibliotekaModel.Egzemplarze" Role="Egzemplarze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Czytelnik">
+              <PropertyRef Name="id_czytelnik" />
+            </Principal>
+            <Dependent Role="Egzemplarze">
+              <PropertyRef Name="komu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -761,6 +839,8 @@
           <EntitySetMapping Name="Pracownicy">
             <EntityTypeMapping TypeName="BibliotekaModel.Pracownicy">
               <MappingFragment StoreEntitySet="Pracownicy">
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="nick" ColumnName="nick" />
                 <ScalarProperty Name="id_pracownik" ColumnName="id_pracownik" />
                 <ScalarProperty Name="imie" ColumnName="imie" />
                 <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
@@ -827,6 +907,9 @@
           <EntitySetMapping Name="Egzemplarze">
             <EntityTypeMapping TypeName="BibliotekaModel.Egzemplarze">
               <MappingFragment StoreEntitySet="Egzemplarze">
+                <ScalarProperty Name="komu" ColumnName="komu" />
+                <ScalarProperty Name="czy_zamowiona" ColumnName="czy_zamowiona" />
+                <ScalarProperty Name="id_biblio" ColumnName="id_biblio" />
                 <ScalarProperty Name="id_status" ColumnName="id_status" />
                 <ScalarProperty Name="sygnatura" ColumnName="sygnatura" />
                 <ScalarProperty Name="id_ksiazka" ColumnName="id_ksiazka" />

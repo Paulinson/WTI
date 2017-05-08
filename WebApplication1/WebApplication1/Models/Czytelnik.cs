@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         public Czytelnik()
         {
             this.Wypozyczenia = new HashSet<Wypozyczenia>();
+            this.Egzemplarze = new HashSet<Egzemplarze>();
         }
     
         public int id_czytelnik { get; set; }
@@ -35,5 +36,7 @@ namespace WebApplication1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egzemplarze> Egzemplarze { get; set; }
     }
 }

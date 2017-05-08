@@ -12,13 +12,11 @@
             @Html.DisplayNameFor(model => model.czy_spozniona)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.czy_uszkodzona)
+            @Html.DisplayNameFor(model => model.Egzemplarze.sygnatura)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Egzemplarze.Ksiazki.nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wypozyczenia.id_wypozyczenie)
+            @Html.DisplayNameFor(model => model.Egzemplarze.Ksiazki.nazwa) <br />
+            <i font size="1">@Html.DisplayNameFor(model => model.Egzemplarze.Ksiazki.isbn)</i>
         </th>
         <th></th>
     </tr>
@@ -29,17 +27,12 @@
             @Html.DisplayFor(modelItem => item.do_kiedy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.czy_spozniona)
+            @if(item.czy_spozniona == 0) {<p>NIE</p>}
+            else 
+            {<p font color="red">TAK - <b>@(DateTime.Now - item.do_kiedy) dni</b></p>}
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.czy_uszkodzona)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.nazwa)
-            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Wypozyczenia.id_wypozyczenie)
+            @Html.DisplayFor(modelItem => item.Egzemplarze.sygnatura)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczeniaKsiazki }) |

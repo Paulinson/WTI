@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Egzemplarze>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sygnatura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Biblioteka.nazwa)
+        </th>
+        <th>
+            Komu
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Biblioteka.nazwa)  
+        </td>
+        <td>
+            <i>@Html.DisplayFor(modelItem => item.Ksiazki.nazwa)</i>
+            <font size="1">@Html.DisplayFor(modelItem => item.Ksiazki.isbn)</font>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sygnatura)   
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Czytelnik.imie)
+            @Html.DisplayFor(modelItem => item.Czytelnik.nazwisko)
+            <i font size="1">Kod: @Html.DisplayFor(modelItem => item.Czytelnik.kod)</i>
+        </td>
+        <td>
+            @Html.ActionLink("Potwierdź", "Wypozycz", new { id = item.id_egzemplarz })
+        </td>
+    </tr>
+}
+
+</table>

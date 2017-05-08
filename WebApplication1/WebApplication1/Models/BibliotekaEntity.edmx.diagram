@@ -27,6 +27,8 @@
         <AssociationConnector Association="BibliotekaModel.FK__Egzemplar__id_ks__6FE99F9F" />
         <AssociationConnector Association="BibliotekaModel.FK__Egzemplar__id_st__72C60C4A" />
         <AssociationConnector Association="BibliotekaModel.FK__Wypozycze__id_eg__74AE54BC" />
+        <AssociationConnector Association="BibliotekaModel.FK__Egzemplar__id_bi__01142BA1" />
+        <AssociationConnector Association="BibliotekaModel.FK__Egzemplarz__komu__14270015" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

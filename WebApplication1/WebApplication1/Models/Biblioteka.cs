@@ -19,6 +19,7 @@ namespace WebApplication1.Models
         {
             this.Ksiazki = new HashSet<Ksiazki>();
             this.Pracownicy = new HashSet<Pracownicy>();
+            this.Egzemplarze = new HashSet<Egzemplarze>();
         }
     
         public int id_biblio { get; set; }
@@ -30,5 +31,7 @@ namespace WebApplication1.Models
         public virtual ICollection<Ksiazki> Ksiazki { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pracownicy> Pracownicy { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Egzemplarze> Egzemplarze { get; set; }
     }
 }

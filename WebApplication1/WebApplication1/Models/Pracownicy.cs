@@ -19,6 +19,8 @@ namespace WebApplication1.Models
         public string nazwisko { get; set; }
         public string profesja { get; set; }
         public Nullable<int> id_biblio { get; set; }
+        public string nick { get; set; }
+        public string haslo { get; set; }
     
         public virtual Biblioteka Biblioteka { get; set; }
     }

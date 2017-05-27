@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Wypozyczenia
     {
@@ -20,7 +21,10 @@ namespace WebApplication1.Models
             this.WypozyczeniaKsiazki = new HashSet<WypozyczeniaKsiazki>();
         }
     
+        [Key]
+        [Display(Name = "ID Wypo¿yczenie")]
         public int id_wypozyczenie { get; set; }
+        [Display(Name = "ID Czytelnik")]
         public Nullable<int> id_czytelnik { get; set; }
     
         public virtual Czytelnik Czytelnik { get; set; }

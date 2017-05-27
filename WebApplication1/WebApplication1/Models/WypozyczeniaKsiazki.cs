@@ -11,13 +11,20 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class WypozyczeniaKsiazki
     {
+        [Key]
+        [Display(Name = "ID Wypo¿yczenia")]
         public int id_wypozyczeniaKsiazki { get; set; }
+        [Display(Name = "ID Wypo¿yczenie")]
         public Nullable<int> id_wypozyczenie { get; set; }
+        [Display(Name = "Wypo¿yczona do")]
         public Nullable<System.DateTime> do_kiedy { get; set; }
+        [Display(Name = "Czy spó¿niona")]
         public Nullable<int> czy_spozniona { get; set; }
+        [Display(Name = "Czy uszkodzona")]
         public Nullable<int> czy_uszkodzona { get; set; }
         public Nullable<int> id_egzemplarza { get; set; }
     

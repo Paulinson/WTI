@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebApplication1.Models.WypozyczeniaKsiazki>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+  
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.Egzemplarze.sygnatura)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczeniaKsiazki }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_wypozyczeniaKsiazki }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_wypozyczeniaKsiazki })
+            @Html.ActionLink("Edytuj", "Edytuj", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Szczegóły", "Szczegóły", new { id=item.id_wypozyczeniaKsiazki }) |
+            @Html.ActionLink("Usuń", "Usuń", new { id=item.id_wypozyczeniaKsiazki })
         </td>
     </tr>
 }

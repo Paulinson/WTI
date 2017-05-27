@@ -1,40 +1,56 @@
 ﻿@model IEnumerable<WebApplication1.Models.Egzemplarze>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.sygnatura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
-        </th>
-        <th>
-            Status
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sygnatura)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ksiazki.nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Statusy.nazwa)
-        </td>
-        <td>
-           
-            @if(item.id_status == 1)
-            {@Html.ActionLink("Zamów", "Zamow", new { id=item.id_egzemplarz }) }
-        </td>
-           
-    </tr>
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Styles Conference</title>
+    <link rel="stylesheet" href="assets/stylesheets/main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    @*<link rel="stylesheet" href="~/Content/bootstrap.css" />*@
+</head>
+<body>
 
-</table>
+    <table class="table">
+        <thead>
+
+
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.sygnatura)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
+                </th>
+                <th scope="col" colspan="2">
+                    Status
+                </th>
+               
+            </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sygnatura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ksiazki.nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Statusy.nazwa)
+                    </td>
+                    <td>
+
+                        @if (item.id_status == 1)
+                        {@Html.ActionLink("Zamów", "Zamow", new { id = item.id_egzemplarz }) }
+                    </td>
+
+                </tr>
+            }
+
+    </table>

@@ -11,15 +11,24 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Pracownicy
     {
+        [Key]
+        [Display(Name = "ID Pracownik")]
         public int id_pracownik { get; set; }
+        [Display(Name = "Imiê")]
         public string imie { get; set; }
+        [Display(Name = "Nazwisko")]
         public string nazwisko { get; set; }
+        [Display(Name = "Profesja")]
         public string profesja { get; set; }
+        [Display(Name = "ID Biblioteki")]
         public Nullable<int> id_biblio { get; set; }
+        [Display(Name = "Nick")]
         public string nick { get; set; }
+        [Display(Name = "Has³o")]
         public string haslo { get; set; }
     
         public virtual Biblioteka Biblioteka { get; set; }

@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Statusy
     {
@@ -19,8 +20,10 @@ namespace WebApplication1.Models
         {
             this.Egzemplarze = new HashSet<Egzemplarze>();
         }
-    
+        [Key]
+        [Display(Name = "ID Status")]
         public int id_status { get; set; }
+        [Display(Name = "Nazwa")]
         public string nazwa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

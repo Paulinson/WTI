@@ -1,58 +1,150 @@
 ﻿@model IEnumerable<WebApplication1.Models.AutorzyKsiazki>
 
+<!--
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (@Html.BeginForm())
-{
-    <p>
-        Wyszukaj: @Html.TextBox("k") <br />
-        <input type="submit" value="Wyszukaj">
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Autorzy.imie)
-            @Html.DisplayNameFor(model => model.Autorzy.nazwisko)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model =>model.Ksiazki.isbn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ksiazki.opis)
-        </th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem=>item.Ksiazki.nazwa)
-        </td>
-        <td>
-            @{
-                int? ksiazka = item.id_ksiazka;
-                var autorzy = item.Ksiazki.AutorzyKsiazki.Where(p => p.id_ksiazka == ksiazka); 
-              }                   
-           @foreach(var a in autorzy)
-           {
-              <p>@Html.DisplayFor(modelItem => a.Autorzy.nazwisko), </p>
-           }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ksiazki.isbn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ksiazki.opis)
-        </td>
-        <td>
-            
-            @Html.ActionLink("Wyświetl", "getEgzemplarze", new { id=item.id_ksiazka})|
-        </td>
-    </tr>
-}
+    -->
 
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Styles Conference</title>
+    <link rel="stylesheet" href="assets/stylesheets/main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    @*<link rel="stylesheet" href="~/Content/bootstrap.css" />*@
+</head>
+<body>
+
+    @using (@Html.BeginForm())
+    {
+        <p>
+            Wyszukaj: @Html.TextBox("k") <br />
+            <input type="submit" value="Wyszukaj">
+        </p>
+
+    }
+
+    <!-- FRONT: -->
+    <!--
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Wyszukaj" class="btn btn-default" />
+        </div>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col" colspan="2">Item</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong class="book-title">Don&#8217;t Make Me Think</strong> by Steve Krug
+                </td>
+                <td class="item-stock">In Stock</td>
+                <td class="item-qty">1</td>
+                <td class="item-price">$30.02</td>
+            </tr>
+            <tr>
+                <td>
+                    <strong class="book-title">A Project Guide to UX Design</strong> by Russ Unger &#38; Carolyn Chandler
+                </td>
+                <td class="item-stock">In Stock</td>
+                <td class="item-qty">2</td>
+                <td class="item-price">$52.94 <span class="item-multiple">$26.47 &#215; 2</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong class="book-title">Introducing HTML5</strong> by Bruce Lawson &#38; Remy Sharp
+                </td>
+                <td class="item-stock">Out of Stock</td>
+                <td class="item-qty">1</td>
+                <td class="item-price">$22.23</td>
+            </tr>
+            <tr>
+                <td>
+                    <strong class="book-title">Bulletproof Web Design</strong> by Dan Cederholm
+                </td>
+                <td class="item-stock">In Stock</td>
+                <td class="item-qty">1</td>
+                <td class="item-price">$30.17</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Subtotal</td>
+                <td>$135.36</td>
+            </tr>
+            <tr>
+                <td colspan="3">Tax</td>
+                <td>$13.54</td>
+            </tr>
+            <tr>
+                <td colspan="3">Total</td>
+                <td>$148.90</td>
+            </tr>
+        </tfoot>
+    </table>
+        -->
+   
+    <!-- koniec-->
+
+    <table class="table">
+        <thead>
+        
+       
+        <tr>
+            <th scope="col" >
+                @Html.DisplayNameFor(model => model.Ksiazki.nazwa)
+            </th>
+          <th>
+                @Html.DisplayNameFor(model => model.Autorzy.imie)
+                @Html.DisplayNameFor(model => model.Autorzy.nazwisko)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Ksiazki.isbn)
+            </th>
+            <th scope="col" colspan="2">
+                @Html.DisplayNameFor(model => model.Ksiazki.opis)
+            </th>
+        </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ksiazki.nazwa)
+                </td>
+                <td>
+                    @{
+                        int? ksiazka = item.id_ksiazka;
+                        var autorzy = item.Ksiazki.AutorzyKsiazki.Where(p => p.id_ksiazka == ksiazka);
+                    }
+                    @foreach (var a in autorzy)
+                    {
+                        <p>@Html.DisplayFor(modelItem => a.Autorzy.nazwisko), </p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ksiazki.isbn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ksiazki.opis)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Szczegóły", "getEgzemplarze", new { id = item.id_ksiazka })
+                </td>
+            </tr>
+                        }
+
+    </table>

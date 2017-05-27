@@ -4,7 +4,7 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<h2>Zaloguj się</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Czytelnik</h4>
+       
         <hr />
       
         <div class="form-group">
@@ -38,11 +38,12 @@
         </div>
     </div>
 }
-
+<!--
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+    -->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

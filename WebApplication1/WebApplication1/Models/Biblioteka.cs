@@ -11,6 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Biblioteka
     {
@@ -22,10 +23,15 @@ namespace WebApplication1.Models
             this.Egzemplarze = new HashSet<Egzemplarze>();
         }
     
+        [Key]
+        [Display(Name = "ID Biblioteki")]
         public int id_biblio { get; set; }
+        [Display(Name = "ID Adres")]
         public Nullable<int> id_adres { get; set; }
+        [Display(Name = "Nazwa")]
         public string nazwa { get; set; }
-    
+
+        [Display(Name = "Adres biblioteki")]
         public virtual AdresyBiblio AdresyBiblio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ksiazki> Ksiazki { get; set; }

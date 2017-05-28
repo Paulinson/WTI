@@ -109,5 +109,12 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
+        public ActionResult kontoCzytelnika(int id)
+        {
+           // int id = (int)Session["id"];
+
+            var result = biblioDB.Czytelnik.Where(p => p.id_czytelnik == id).FirstOrDefault();
+            return View(result);
+        }
     }
 }

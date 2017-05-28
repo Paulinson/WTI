@@ -11,8 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AdresyBiblio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,22 +19,13 @@ namespace WebApplication1.Models
         {
             this.Biblioteka = new HashSet<Biblioteka>();
         }
-
-        [Key]
-        [Display(Name = "Adres biblioteki")]
-
+    
         public int id_adresBiblio { get; set; }
-        [Display(Name = "Ulica")]
         public string ulica { get; set; }
-        [Display(Name = "Numer domu")]
         public Nullable<int> nr_domu { get; set; }
-        [Display(Name = "Numer mieszkania")]
         public Nullable<int> nr_mieszkania { get; set; }
-        [Display(Name = "Województwo")]
         public string wojewodztwo { get; set; }
-        [Display(Name = "Miasto")]
         public string miasto { get; set; }
-        [Display(Name = "Kod pocztowy")]
         public string kod_pocztowy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

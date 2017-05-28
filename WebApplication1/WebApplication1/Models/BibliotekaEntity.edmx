@@ -57,6 +57,7 @@
           <Property Name="nr_domu" Type="int" />
           <Property Name="nr_mieszkania" Type="int" />
           <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="czy_czarna" Type="int" />
         </EntityType>
         <EntityType Name="Egzemplarze">
           <Key>
@@ -430,6 +431,7 @@
           <Property Name="nr_mieszkania" Type="Int32" />
           <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Egzemplarze" Relationship="BibliotekaModel.FK__Egzemplarz__komu__14270015" FromRole="Czytelnik" ToRole="Egzemplarze" />
+          <Property Name="czy_czarna" Type="Int32" />
         </EntityType>
         <EntityType Name="Ksiazki">
           <Key>
@@ -810,6 +812,7 @@
           <EntitySetMapping Name="Czytelnik">
             <EntityTypeMapping TypeName="BibliotekaModel.Czytelnik">
               <MappingFragment StoreEntitySet="Czytelnik">
+                <ScalarProperty Name="czy_czarna" ColumnName="czy_czarna" />
                 <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
                 <ScalarProperty Name="nr_mieszkania" ColumnName="nr_mieszkania" />
                 <ScalarProperty Name="nr_domu" ColumnName="nr_domu" />

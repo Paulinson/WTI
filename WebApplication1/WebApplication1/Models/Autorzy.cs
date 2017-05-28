@@ -11,7 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Autorzy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,18 +19,12 @@ namespace WebApplication1.Models
         {
             this.AutorzyKsiazki = new HashSet<AutorzyKsiazki>();
         }
-
-        [Key]
-        [Display(Name = "ID Autor")]
-
+    
         public int id_autor { get; set; }
-        [Display(Name = "Imiê")]
         public string imie { get; set; }
-        [Display(Name = "Nazwisko")]
         public string nazwisko { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Autorzy ksi¹¿ki")]
         public virtual ICollection<AutorzyKsiazki> AutorzyKsiazki { get; set; }
     }
 }

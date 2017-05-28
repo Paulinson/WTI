@@ -29,28 +29,37 @@
                 <th scope="col" colspan="2">
                     Status
                 </th>
-               
+
             </tr>
-            </thead>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sygnatura)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ksiazki.nazwa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Statusy.nazwa)
-                    </td>
-                    <td>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sygnatura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ksiazki.nazwa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Statusy.nazwa)
+                </td>
 
-                        @if (item.id_status == 1)
-                        {@Html.ActionLink("Zamów", "Zamow", new { id = item.id_egzemplarz }) }
-                    </td>
+                <td>
+                    @if (item.id_status == 1)
+                    {
+                        if (Session["id"] != null)
+                        {
+                            @Html.ActionLink("Zamów", "Zamow", new { id = item.id_egzemplarz })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Zamów", "Login","Account")
+                        }
+                    }
+                </td>
 
-                </tr>
-            }
+            </tr>
+        }
 
     </table>

@@ -279,6 +279,11 @@
     <Content Include="Views\Borrow\getZamowione.cshtml" />
     <Content Include="Views\Account\LoginPrac.cshtml" />
     <Content Include="Views\Borrow\getWypozyczenia.cshtml" />
+    <Content Include="Views\Home\getBiblio.cshtml" />
+    <Content Include="Views\Account\kontoCzytelnika.cshtml" />
+    <Content Include="Views\Home\zarzadzajCzytelnikami.cshtml" />
+    <Content Include="Views\Home\szczegolyCzytelnik.cshtml" />
+    <Content Include="Views\Borrow\getWypozyczoneById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

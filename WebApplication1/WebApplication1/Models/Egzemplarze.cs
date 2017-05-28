@@ -11,8 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Egzemplarze
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,23 +19,13 @@ namespace WebApplication1.Models
         {
             this.WypozyczeniaKsiazki = new HashSet<WypozyczeniaKsiazki>();
         }
-
-
-        [Key]
-        [Display(Name = "ID Egzemplarza")]
-
+    
         public int id_egzemplarz { get; set; }
-        [Display(Name = "ID Ksi¹¿ki")]
         public Nullable<int> id_ksiazka { get; set; }
-        [Display(Name = "Sygnatura")]
         public string sygnatura { get; set; }
-        [Display(Name = "ID Statusu")]
         public Nullable<int> id_status { get; set; }
-        [Display(Name = "ID Biblioteki")]
         public Nullable<int> id_biblio { get; set; }
-        [Display(Name = "Czy zamówiona")]
         public Nullable<int> czy_zamowiona { get; set; }
-        [Display(Name = "Komu")]
         public Nullable<int> komu { get; set; }
     
         public virtual Ksiazki Ksiazki { get; set; }

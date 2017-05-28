@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication1.Models.Czytelnik>
+
+@{
+    ViewBag.Title = "zarzadzajCzytelnikami";
+}
+
+<h2>zarzadzajCzytelnikami</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwisko)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pesel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nazwisko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pesel)
+        </td>
+        <td>
+            @Html.ActionLink("Szczegóły", "szczegolyCzytelnik", new { id=item.id_czytelnik })
+        </td>
+    </tr>
+}
+
+</table>

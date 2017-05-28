@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication1.Models.Biblioteka>
+
+@{
+    ViewBag.Title = "getBiblio";
+}
+
+<h2>getBiblio</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_adres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th>
+            Adres
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_adres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.ulica)
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.nr_domu)/
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.nr_mieszkania)
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.kod_pocztowy)
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.miasto), 
+            @Html.DisplayFor(modelItem => item.AdresyBiblio.wojewodztwo)
+
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_biblio }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_biblio }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_biblio })
+        </td>
+    </tr>
+}
+
+</table>

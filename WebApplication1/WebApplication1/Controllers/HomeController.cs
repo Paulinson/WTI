@@ -43,5 +43,31 @@ namespace WebApplication1.Controllers
 
             return View(ksiazki.ToList());
         }
+
+        public ActionResult getBiblio()
+        {
+            var result = biblioDb.Biblioteka.ToList();
+
+            return View(result);
+        }
+
+        public ActionResult zarzadzajCzytelnikami()
+        {
+            var details = biblioDb.Czytelnik.ToList();
+            return View(details);
+        }
+
+        public ActionResult szczegolyCzytelnik(int id)
+        {
+            var result = biblioDb.Czytelnik.Where(p => p.id_czytelnik == id).FirstOrDefault();
+            return View(result);
+        }
+
+        public ActionResult dodajDoCzarnej(int id)
+        {
+            var details = biblioDb.Czytelnik.Where(p => p.id_czytelnik == id).FirstOrDefault();
+        
+            return View();
+        }
     }
 }

@@ -11,7 +11,6 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Czytelnik
     {
@@ -22,31 +21,19 @@ namespace WebApplication1.Models
             this.Egzemplarze = new HashSet<Egzemplarze>();
         }
     
-        [Key]
-        [Display(Name = "ID Czytelnik")]
         public int id_czytelnik { get; set; }
-        [Display(Name = "Imiê")]
         public string imie { get; set; }
-        [Display(Name = "Nazwisko")]
         public string nazwisko { get; set; }
-        [Display(Name = "Kod")]
         public string kod { get; set; }
-        [Display(Name = "Pesel")]
         public string pesel { get; set; }
-        [Display(Name = "E-mail")]
         public string email { get; set; }
-        [Display(Name = "Kod pocztowy")]
         public string kod_pocztowy { get; set; }
-        [Display(Name = "Miasto")]
         public string miasto { get; set; }
-        [Display(Name = "Ulica")]
         public string ulica { get; set; }
-        [Display(Name = "Numer domu")]
         public Nullable<int> nr_domu { get; set; }
-        [Display(Name = "Numer mieszkania")]
         public Nullable<int> nr_mieszkania { get; set; }
-        [Display(Name = "Województwo")]
         public string wojewodztwo { get; set; }
+        public Nullable<int> czy_czarna { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; }

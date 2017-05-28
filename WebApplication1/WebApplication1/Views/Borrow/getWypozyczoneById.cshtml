@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication1.Models.WypozyczeniaKsiazki>
+
+@{
+    ViewBag.Title = "getWypozyczoneById";
+}
+
+<h2>getWypozyczoneById</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.do_kiedy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.czy_spozniona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.czy_uszkodzona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Egzemplarze.Ksiazki.nazwa))
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.do_kiedy)
+        </td>
+        <td>
+            @if (item.czy_spozniona == 0) {<p>NIE</p>}
+            else { <p font color="red">TAK</p>}
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.czy_uszkodzona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.nazwa)
+            @Html.DisplayFor(modelItem => item.Egzemplarze.Ksiazki.isbn)
+        </td>
+    </tr>
+}
+
+</table>

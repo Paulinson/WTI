@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+
  
         public ActionResult Czytelnicy()
         {
@@ -102,7 +103,7 @@ namespace WebApplication1.Controllers
        
         public ActionResult getWypozyczone()
         {
-            var details = biblioDB.WypozyczeniaKsiazki.Where(p => p.Wypozyczenia.id_czytelnik == 1).ToList();
+            var details = biblioDB.WypozyczeniaKsiazki.ToList();
 
             return View(details);
         }
@@ -111,6 +112,13 @@ namespace WebApplication1.Controllers
         {
             var details = biblioDB.Egzemplarze.Where(p => p.id_status == 3);
             return View(details.ToList());
+        }
+
+        public ActionResult getWypozyczoneById(int id)
+        {
+            var details = biblioDB.WypozyczeniaKsiazki.Where(p => p.Wypozyczenia.Czytelnik.id_czytelnik == id).ToList();
+
+            return View(details);
         }
     }
 }

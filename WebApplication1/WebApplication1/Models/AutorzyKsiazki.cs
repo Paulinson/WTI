@@ -11,20 +11,14 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class AutorzyKsiazki
     {
-        [Key]
-        [Display(Name = "ID Autor")]
         public int id_autKsiazki { get; set; }
-        [Display(Name = "ID Autor")]
         public Nullable<int> id_autor { get; set; }
-        [Display(Name = "ID Ksi¹¿ka")]
         public Nullable<int> id_ksiazka { get; set; }
-        [Display(Name = "Autor")]
+    
         public virtual Autorzy Autorzy { get; set; }
-        [Display(Name = "Ksi¹¿ka")]
         public virtual Ksiazki Ksiazki { get; set; }
     }
 }
